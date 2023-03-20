@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     dir('eks-cluster') {
-                        sh "terraform init -migrate-state"
+                        sh "terraform init"
                         sh "terraform apply --auto-approve"
                     }
                 }
