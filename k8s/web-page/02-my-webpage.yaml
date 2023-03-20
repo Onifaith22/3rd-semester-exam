@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-web-app
-        image: suleimanjr1/my-personal-webapp:1.1
+        image: onifaith/web-app
         ports:
         - name: web
           containerPort: 80
@@ -56,8 +56,8 @@ metadata:
   namespace: my-webpage
   annotations:
     prometheus.io/scrape: 'true'
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
-    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+    service.kubernetes.io/aws-load-balancer-type: nlb
+    service.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
   type: LoadBalancer
   selector:
@@ -76,7 +76,7 @@ metadata:
   namespace: my-webpage
   annotations:
     prometheus.io/scrape: 'true'
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.kubernetes.io/aws-load-balancer-type: nlb
 spec:
   type: LoadBalancer
   selector:

@@ -1,5 +1,5 @@
-resource "aws_iam_role" "cicd-cluster" {
-  name = "eks-cluster-cicd-cluster"
+resource "aws_iam_role" "k8-cluster" {
+  name = "eks-cluster-k8-cluster"
 
   assume_role_policy = <<POLICY
 {
@@ -17,23 +17,23 @@ resource "aws_iam_role" "cicd-cluster" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "cicd-cluster-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "k8-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.cicd-cluster.name
+  role       = aws_iam_role.k8-cluster.name
 }
 
-resource "aws_eks_cluster" "cicd-cluster" {
-  name     = "cicd-cluster"
-  role_arn = aws_iam_role.cicd-cluster.arn
+resource "aws_eks_cluster" "k8-cluster" {
+  name     = "k8-cluster"
+  role_arn = aws_iam_role.k8-cluster.arn
 
   vpc_config {
     subnet_ids = [
-      aws_subnet.private-us-east-1a.id,
-      aws_subnet.private-us-east-1b.id,
-      aws_subnet.public-us-east-1a.id,
-      aws_subnet.public-us-east-1b.id
+      aws_subnet.private-us-east-2a.id,
+      aws_subnet.private-us-east-2b.id,
+      aws_subnet.public-us-east-2a.id,
+      aws_subnet.public-us-east-2b.id
     ]
   }
 
-  depends_on = [aws_iam_role_policy_attachment.cicd-cluster-AmazonEKSClusterPolicy]
+  depends_on = [aws_iam_role_policy_attachment.k8-cluster-AmazonEKSClusterPolicy]
 }
